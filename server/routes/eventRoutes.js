@@ -217,8 +217,9 @@ router.post('/:id/register', protect, async (req, res) => {
     }
 
     // Check if already registered
+    const userId = req.user.id || req.user._id;
     const isRegistered = event.participants.some(
-      participant => participant.user.toString() === req.user._id.toString() && participant.status === 'registered'
+      participant => participant.user.toString() === userId.toString() && participant.status === 'registered'
     );
 
     if (isRegistered) {
@@ -227,7 +228,7 @@ router.post('/:id/register', protect, async (req, res) => {
 
     // Add user to participants
     event.participants.push({
-      user: req.user._id,
+      user: userId,
       registeredAt: new Date(),
       status: 'registered'
     });
@@ -235,7 +236,7 @@ router.post('/:id/register', protect, async (req, res) => {
     await event.save();
 
     // Add event to user's registered events
-    await User.findByIdAndUpdate(req.user._id, {
+    await User.findByIdAndUpdate(userId, {
       $addToSet: { registeredEvents: event._id }
     });
 

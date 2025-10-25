@@ -66,7 +66,7 @@ router.get('/me', protect, async (req, res) => {
     
     res.json({
       success: true,
-      data: user
+      user: user // Changed from 'data' to 'user' for consistency
     });
   } catch (error) {
     res.status(500).json({
@@ -100,6 +100,7 @@ router.put('/profile', protect, async (req, res) => {
     if (bikeType !== undefined) updateFields.bikeType = bikeType;
     if (bikeModel !== undefined) updateFields.bikeModel = bikeModel;
     if (bio !== undefined) updateFields.bio = bio;
+    if (req.body.themeColor !== undefined) updateFields.themeColor = req.body.themeColor;
     
     const user = await User.findByIdAndUpdate(
       req.user.id,

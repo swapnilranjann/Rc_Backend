@@ -18,6 +18,8 @@ import routeRoutes from './routes/routeRoutes.js';
 import blogRoutes from './routes/blogRoutes.js';
 import successStoryRoutes from './routes/successStoryRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
+import statsRoutes from './routes/statsRoutes.js';
+import gearReviewRoutes from './routes/gearReviewRoutes.js';
 import { requestLogger, errorLogger } from './middleware/logger.js';
 
 // Load environment variables
@@ -97,6 +99,8 @@ app.use('/api/routes', routeRoutes);
 app.use('/api/blog', blogRoutes);
 app.use('/api/success-stories', successStoryRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/stats', statsRoutes);
+app.use('/api/gear-reviews', gearReviewRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

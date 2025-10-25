@@ -59,6 +59,11 @@ const userSchema = new mongoose.Schema({
     maxlength: [200, 'Bio cannot exceed 200 characters'],
     default: ''
   },
+  themeColor: {
+    type: String,
+    enum: ['blue', 'orange', 'green', 'purple', 'red', 'pink', 'teal', 'indigo', 'cyan', 'amber', 'lime', 'rose', 'violet', 'emerald', 'sky', 'fuchsia'],
+    default: 'blue'
+  },
   isVerified: {
     type: Boolean,
     default: false

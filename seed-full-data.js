@@ -340,6 +340,20 @@ async function seedDatabase() {
     const createdCommunities = await Community.insertMany(communities);
     console.log(`✓ Created ${createdCommunities.length} communities`);
 
+    // ⚠️ CRITICAL FIX: Update users' joinedCommunities field
+    console.log('🔄 Syncing user memberships...');
+    for (let i = 0; i < createdCommunities.length; i++) {
+      const community = createdCommunities[i];
+      const memberUserIds = community.members.map(m => m.user);
+      
+      // Add this community to each member's joinedCommunities
+      await User.updateMany(
+        { _id: { $in: memberUserIds } },
+        { $addToSet: { joinedCommunities: community._id } }
+      );
+    }
+    console.log(`✓ Synced memberships for all users`);
+
     // Create events
     const events = eventsData.map((event, index) => ({
       ...event,
