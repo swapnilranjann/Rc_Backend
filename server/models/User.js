@@ -61,7 +61,10 @@ const userSchema = new mongoose.Schema({
   },
   themeColor: {
     type: String,
-    enum: ['blue', 'orange', 'green', 'purple', 'red', 'pink', 'teal', 'indigo', 'cyan', 'amber', 'lime', 'rose', 'violet', 'emerald', 'sky', 'fuchsia'],
+    enum: [
+      'blue', 'orange', 'green', 'purple', 'red', 'pink', 'teal', 'indigo', 'cyan', 'amber', 'lime', 'rose', 'violet', 'emerald', 'sky', 'fuchsia',
+      'sunset-mix', 'ocean-mix', 'forest-mix', 'cosmic-mix', 'fire-mix', 'ice-mix', 'gold-mix', 'silver-mix', 'rainbow-mix', 'neon-mix', 'aurora-mix', 'steel-mix', 'coral-mix', 'mint-mix', 'lavender-mix', 'peach-mix'
+    ],
     default: 'blue'
   },
   isVerified: {
