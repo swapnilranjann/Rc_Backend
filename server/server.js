@@ -13,6 +13,11 @@ import eventRoutes from './routes/eventRoutes.js';
 import postRoutes from './routes/postRoutes.js';
 import messageRoutes from './routes/messageRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
+import followRoutes from './routes/followRoutes.js';
+import routeRoutes from './routes/routeRoutes.js';
+import blogRoutes from './routes/blogRoutes.js';
+import successStoryRoutes from './routes/successStoryRoutes.js';
+import contactRoutes from './routes/contactRoutes.js';
 import { requestLogger, errorLogger } from './middleware/logger.js';
 
 // Load environment variables
@@ -87,6 +92,11 @@ app.use('/api/events', eventRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/follow', followRoutes);
+app.use('/api/routes', routeRoutes);
+app.use('/api/blog', blogRoutes);
+app.use('/api/success-stories', successStoryRoutes);
+app.use('/api/contact', contactRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

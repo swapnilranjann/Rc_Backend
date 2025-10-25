@@ -91,16 +91,19 @@ router.post('/logout', protect, (req, res) => {
 // @access  Private
 router.put('/profile', protect, async (req, res) => {
   try {
-    const { city, bikeType, bikeModel, bio } = req.body;
+    const { name, city, bikeType, bikeModel, bio } = req.body;
+    
+    // Build update object with only provided fields
+    const updateFields = {};
+    if (name !== undefined) updateFields.name = name;
+    if (city !== undefined) updateFields.city = city;
+    if (bikeType !== undefined) updateFields.bikeType = bikeType;
+    if (bikeModel !== undefined) updateFields.bikeModel = bikeModel;
+    if (bio !== undefined) updateFields.bio = bio;
     
     const user = await User.findByIdAndUpdate(
       req.user.id,
-      {
-        city,
-        bikeType,
-        bikeModel,
-        bio
-      },
+      updateFields,
       { new: true, runValidators: true }
     );
 

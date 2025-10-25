@@ -86,6 +86,91 @@ const eventSchema = new mongoose.Schema({
     type: Number, // in kilometers
     min: [0, 'Distance cannot be negative']
   },
+  
+  // 🗺️ ROUTE DETAILS - World-class route planning
+  routeDetails: {
+    startLocation: {
+      name: String,
+      address: String,
+      coordinates: {
+        lat: Number,
+        lng: Number
+      }
+    },
+    endLocation: {
+      name: String,
+      address: String,
+      coordinates: {
+        lat: Number,
+        lng: Number
+      }
+    },
+    waypoints: [{
+      name: String,
+      type: {
+        type: String,
+        enum: ['fuel', 'food', 'rest', 'scenic', 'other']
+      },
+      description: String
+    }],
+    routeType: {
+      type: String,
+      enum: ['highway', 'scenic', 'mountain', 'coastal', 'mixed'],
+      default: 'mixed'
+    },
+    estimatedDuration: {
+      hours: Number,
+      minutes: Number
+    },
+    breakTime: {
+      type: Number, // in minutes
+      default: 30
+    }
+  },
+  
+  // 💰 COST ESTIMATION - Professional cost breakdown
+  costEstimate: {
+    fuelCost: {
+      perBike: Number,
+      total: Number
+    },
+    tollCharges: {
+      amount: Number,
+      numberOfTolls: Number
+    },
+    parkingFees: Number,
+    miscellaneous: Number,
+    totalPerPerson: Number,
+    totalForGroup: Number,
+    currency: {
+      type: String,
+      default: 'INR'
+    },
+    lastUpdated: Date
+  },
+  
+  // 🏍️ BIKE REQUIREMENTS - Smart recommendations
+  bikeRequirements: {
+    recommended: [String], // e.g., ['Adventure', 'Touring', 'Cruiser']
+    minimumCC: Number,
+    terrainSuitability: {
+      type: String,
+      enum: ['city', 'highway', 'offroad', 'mixed'],
+      default: 'mixed'
+    }
+  },
+  
+  // ⏱️ TIMING DETAILS - Professional time management
+  timing: {
+    departureTime: String,
+    estimatedArrival: String,
+    checkpoints: [{
+      location: String,
+      estimatedTime: String,
+      purpose: String // e.g., 'Breakfast', 'Photo stop', 'Fuel'
+    }]
+  },
+  
   coverImage: {
     type: String,
     default: null

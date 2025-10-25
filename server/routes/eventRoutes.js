@@ -130,7 +130,12 @@ router.post('/', protect, [
       distance,
       coverImage,
       requirements,
-      tags
+      tags,
+      // Advanced world-class features
+      routeDetails,
+      costEstimate,
+      bikeRequirements,
+      timing
     } = req.body;
 
     // Check if community exists and user is a member
@@ -167,7 +172,12 @@ router.post('/', protect, [
       distance,
       coverImage,
       requirements: requirements || [],
-      tags: tags || []
+      tags: tags || [],
+      // Advanced world-class features
+      routeDetails,
+      costEstimate,
+      bikeRequirements,
+      timing
     });
 
     await event.save();
